@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Mother's Day, Aimee! 💛</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: #16082e;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+
+  /* floating hearts – very faint, never covers text */
+  #heartsContainer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .heart {
+    position: absolute;
+    bottom: -60px;
+    opacity: 0;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0%   { opacity: 0;    transform: translateY(0); }
+    10%  { opacity: 0.2; }
+    80%  { opacity: 0.12; }
+    100% { opacity: 0;    transform: translateY(-105vh); }
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px 90px;
+    background: radial-gradient(ellipse at 50% 0%, #3b1f7a 0%, #16082e 65%);
+  }
+  .flower-row { font-size: 2.2rem; letter-spacing: 8px; margin-bottom: 22px; animation: sway 3s ease-in-out infinite; }
+  @keyframes sway { 0%,100%{ transform:rotate(-2deg) } 50%{ transform:rotate(2deg) } }
+
+  .hero-tag {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #f5c842;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp .9s ease forwards .3s;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 13vw, 7.5rem);
+    font-weight: 700;
+    line-height: 1;
+    color: #ffffff;
+    text-shadow: 0 0 60px rgba(245,200,66,.4);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp .9s ease forwards .6s;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(2rem, 8vw, 5rem);
+    color: #f5c842;
+    opacity: 0;
+    animation: fadeUp .9s ease forwards .9s;
+  }
+  .hero-sub {
+    margin-top: 28px;
+    font-size: clamp(1rem, 2.8vw, 1.2rem);
+    color: #ddd4ff;
+    max-width: 500px;
+    line-height: 1.8;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeUp .9s ease forwards 1.2s;
+  }
+  .hero-from {
+    margin-top: 22px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: #f5c842;
+    font-weight: 600;
+    opacity: 0;
+    animation: fadeUp .9s ease forwards 1.5s;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    animation: bounce 1.5s ease-in-out infinite;
+  }
+  @keyframes bounce { 0%,100%{ transform:translateX(-50%) translateY(0) } 50%{ transform:translateX(-50%) translateY(10px) } }
+  @keyframes fadeUp  { from{ opacity:0; transform:translateY(28px) } to{ opacity:1; transform:translateY(0) } }
+
+  /* SECTIONS */
+  .section     { position:relative; z-index:1; padding:80px 24px; background:#16082e; }
+  .section-alt { background:#1e0d3a; }
+
+  .section-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: #f5c842;
+    margin-bottom: 48px;
+  }
+  .section-title span { font-style:italic; color:#ffffff; }
+
+  /* CARDS */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #2a1050;
+    border: 2px solid #f5c842;
+    border-radius: 20px;
+    padding: 36px 28px;
+    position: relative;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .card::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0;
+    height:4px; border-radius:18px 18px 0 0;
+    background:linear-gradient(90deg,#e8637a,#f5c842,#7ec8a0);
+  }
+  .card:hover { transform:translateY(-6px); box-shadow:0 16px 50px rgba(245,200,66,.2); }
+
+  .card-icon { font-size:2.6rem; margin-bottom:14px; }
+  .card-who  {
+    font-size:.78rem; letter-spacing:3px; text-transform:uppercase;
+    color:#f5c842; margin-bottom:12px; font-weight:700;
+  }
+  .card-text { font-size:1.05rem; line-height:1.75; color:#ffffff; font-weight:500; }
+  .card-sig  {
+    margin-top:18px;
+    font-family:'Playfair Display',serif; font-style:italic;
+    color:#e8637a; font-size:1.1rem;
+  }
+
+  /* DIVIDER */
+  .divider {
+    text-align:center; font-size:1.5rem; letter-spacing:14px;
+    padding:12px 0; color:#f5c842; opacity:.5;
+    background:#16082e; position:relative; z-index:1;
+  }
+
+  /* BUBBLES */
+  .bubbles-wrap {
+    display:flex; gap:14px; max-width:960px;
+    margin:0 auto; flex-wrap:wrap; justify-content:center;
+  }
+  .bubble {
+    background:#2a1050; border:2px solid #5a3a9a;
+    border-radius:50px; padding:12px 20px;
+    font-size:.95rem; color:#ffffff; font-weight:600;
+    display:flex; align-items:center; gap:8px;
+    transition:all .25s; cursor:default;
+  }
+  .bubble:hover { background:#3d1a70; border-color:#f5c842; color:#f5c842; transform:scale(1.05); }
+
+  /* BADGES */
+  .badges { display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-bottom:24px; }
+  .badge {
+    background:#2a1050; border:2px solid #f5c842;
+    border-radius:14px; padding:12px 24px;
+    font-size:.95rem; font-weight:700; letter-spacing:1px; color:#f5c842;
+  }
+  .sport-note {
+    text-align:center; color:#ddd4ff;
+    font-size:1.05rem; max-width:580px;
+    margin:0 auto; line-height:1.75; font-weight:500;
+  }
+
+  /* HEART SECTION */
+  .heart-section {
+    position:relative; z-index:1; padding:80px 24px;
+    background:#1e0d3a; text-align:center;
+  }
+  .big-heart {
+    font-size:clamp(8rem,22vw,14rem); line-height:1;
+    cursor:pointer; display:inline-block;
+    filter:drop-shadow(0 0 30px rgba(232,99,122,.6));
+    animation:heartbeat 2.2s ease-in-out infinite;
+    user-select:none;
+  }
+  @keyframes heartbeat {
+    0%,100%{ transform:scale(1) }
+    14%{ transform:scale(1.12) }
+    28%{ transform:scale(1) }
+    42%{ transform:scale(1.06) }
+  }
+  .heart-msg {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.1rem,3.5vw,1.8rem);
+    color:#ffffff; margin-top:26px; line-height:1.6;
+  }
+  .heart-msg strong { color:#f5c842; }
+
+  /* CLOSING */
+  .closing {
+    position:relative; z-index:1;
+    padding:80px 24px 120px; text-align:center;
+    background:radial-gradient(ellipse at 50% 100%, #3b1f7a 0%, #16082e 65%);
+  }
+  .closing-quote {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.4rem,4.5vw,2.6rem);
+    line-height:1.55; color:#ffffff;
+    max-width:680px; margin:0 auto 30px;
+  }
+  .closing-quote em { color:#f5c842; font-style:italic; }
+  .closing-note  { color:#ddd4ff; font-size:1.1rem; letter-spacing:1px; font-weight:500; }
+  .closing-names {
+    margin-top:14px;
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:clamp(1.2rem,4vw,2rem); color:#e8637a;
+  }
+  .closing-flowers { margin-top:40px; font-size:2.8rem; letter-spacing:8px; }
+
+  /* CONFETTI */
+  .confetti-piece {
+    position:fixed; pointer-events:none; z-index:9999;
+    border-radius:50%; animation:cfFall 1.4s ease forwards;
+  }
+  @keyframes cfFall {
+    0%  { opacity:1; transform:translate(0,0) rotate(0deg); }
+    100%{ opacity:0; transform:translate(var(--tx),var(--ty)) rotate(700deg); }
+  }
+  .sparkle {
+    position:fixed; pointer-events:none; z-index:9999;
+    font-size:1.4rem; animation:sparkAnim 1.8s ease-out forwards;
+  }
+  @keyframes sparkAnim {
+    0%  { opacity:1; transform:scale(0) rotate(0deg); }
+    50% { opacity:1; transform:scale(1.6) rotate(180deg); }
+    100%{ opacity:0; transform:scale(0) rotate(360deg); }
+  }
+</style>
+</head>
+<body>
+
+<div id="heartsContainer"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="flower-row">🌸 🌼 🌺 🌸 🌼</div>
+  <div class="hero-tag">With so much love, from your family</div>
+  <div class="hero-title">Happy<br>Mother's</div>
+  <div class="hero-name">Day, Aimee! 💛</div>
+  <div class="hero-sub">
+    To the most amazing mom — the one cheering the loudest, loving the hardest, and making every ordinary moment feel extraordinary. Today is all about you.
+  </div>
+  <div class="hero-from">— from Gracie, Noah &amp; Joseph</div>
+  <div class="scroll-hint">👇</div>
+</section>
+
+<!-- LOVE NOTES -->
+<section class="section">
+  <div class="section-title"><span>Words</span> from the heart</div>
+  <div class="cards-grid">
+
+    <div class="card">
+      <div class="card-icon">🥎</div>
+      <div class="card-who">From Gracie · #89</div>
+      <div class="card-text">
+        Mom, you're always there cheering me on at every single game, no matter what! You're the best hype woman ever, and I love you so much. You always know how to make me feel like a superstar — on and off the field.
+      </div>
+      <div class="card-sig">Love always, Gracie 🥎</div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🏈</div>
+      <div class="card-who">From Noah · #1 Woodbury</div>
+      <div class="card-text">
+        Mom, you are literally the strongest person I know. You've been at every big game, every moment that matters, and you never stopped believing in me. Playing at US Bank Stadium was incredible — but having you there made it real. You're my biggest fan and I'm yours.
+      </div>
+      <div class="card-sig">Love you, Noah 🏈</div>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">💛</div>
+      <div class="card-who">From Joseph</div>
+      <div class="card-text">
+        Aimee, watching you be a mom to Gracie and Noah is one of the most beautiful things I've ever seen. You give them everything — your time, your heart, your energy. They are so lucky to call you theirs, and I appreciate everything you do for them every single day.
+      </div>
+      <div class="card-sig">With gratitude, Joseph</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider">✦ ✦ ✦</div>
+
+<!-- FAVORITE THINGS -->
+<section class="section section-alt">
+  <div class="section-title"><span>Our favorite</span> things about you</div>
+  <div class="bubbles-wrap">
+    <div class="bubble">🎉 Loudest cheerer at every game</div>
+    <div class="bubble">🌅 Makes ordinary days feel special</div>
+    <div class="bubble">🤗 Best hugs in the whole world</div>
+    <div class="bubble">🏕️ Camping adventures you make happen</div>
+    <div class="bubble">⛵ Boat days with the whole crew</div>
+    <div class="bubble">🎵 Concert mom doing it right</div>
+    <div class="bubble">💪 Tough, strong, unstoppable</div>
+    <div class="bubble">😂 Makes us laugh on hard days</div>
+    <div class="bubble">❤️ Loves us unconditionally</div>
+    <div class="bubble">🌸 Always our safe place</div>
+    <div class="bubble">⭐ Our #1 forever fan</div>
+    <div class="bubble">🏆 World's greatest sports mom</div>
+  </div>
+</section>
+
+<div class="divider">✦ ✦ ✦</div>
+
+<!-- SPORT PRIDE -->
+<section class="section">
+  <div class="section-title"><span>Proudly</span> Mom of</div>
+  <div class="badges">
+    <div class="badge">🥎 GRACIE · #89 · Thomas · Softball</div>
+    <div class="badge">🏈 NOAH · #1 · Woodbury Football</div>
+  </div>
+  <p class="sport-note">
+    You've been on every sideline, in every bleacher, through every win and every learning moment. Being a sports mom isn't easy — but you make it look like pure joy. 🏆
+  </p>
+</section>
+
+<div class="divider">✦ ✦ ✦</div>
+
+<!-- INTERACTIVE HEART -->
+<section class="heart-section">
+  <div class="section-title"><span>Tap the</span> heart! 👇</div>
+  <div class="big-heart" id="bigHeart" onclick="burstHeart(event)">❤️</div>
+  <div class="heart-msg" id="heartMsg">
+    Every single day, you give us <strong>your whole heart.</strong><br>
+    Today we're giving it right back. 💛
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="closing-quote">
+    "The best thing about having you as our mom<br>
+    is knowing that no matter what, <em>we are loved.</em>"
+  </div>
+  <div class="closing-note">With all our hearts, wishing you the most beautiful day —</div>
+  <div class="closing-names">Gracie 🥎 &nbsp;·&nbsp; Noah 🏈 &nbsp;·&nbsp; Joseph 💛</div>
+  <div class="closing-flowers">🌸🌼🌺🌸🌼🌺🌸</div>
+</section>
+
+<script>
+  // Floating hearts — very faint
+  const hc = document.getElementById('heartsContainer');
+  const emojis = ['❤️','💛','💕','🌸','💖','🌼'];
+  function spawnHeart() {
+    const el = document.createElement('div');
+    el.className = 'heart';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.fontSize = (Math.random() * 1.2 + 0.7) + 'rem';
+    const dur = Math.random() * 10 + 12;
+    el.style.animationDuration = dur + 's';
+    hc.appendChild(el);
+    setTimeout(() => el.remove(), dur * 1000 + 500);
+  }
+  for (let i = 0; i < 6; i++) setTimeout(spawnHeart, i * 900);
+  setInterval(spawnHeart, 2000);
+
+  // Heart burst
+  const msgs = [
+    "You are AMAZING, Aimee! 💛",
+    "Best Mom in the whole world! 🌸",
+    "Gracie & Noah are so lucky! ❤️",
+    "We love you to the moon! 🌙",
+    "Happy Mother's Day!! 🎉",
+    "You're our everything! 💕",
+    "Strongest mom we know! 💪",
+  ];
+  let mi = 0;
+
+  function burstHeart(e) {
+    const colors = ['#f5c842','#e8637a','#7ec8a0','#a78bfa','#ffffff'];
+    const x = e.clientX, y = e.clientY;
+    for (let i = 0; i < 32; i++) {
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      const a = (Math.PI * 2 * i) / 32;
+      const d = Math.random() * 160 + 80;
+      p.style.cssText = `left:${x}px;top:${y}px;background:${colors[i%colors.length]};width:${Math.random()*9+5}px;height:${Math.random()*9+5}px;border-radius:${Math.random()>.5?'50%':'3px'}`;
+      p.style.setProperty('--tx', Math.cos(a)*d+'px');
+      p.style.setProperty('--ty', Math.sin(a)*d+'px');
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(), 1500);
+    }
+    const sparks = ['✨','💛','🌸','💕','⭐','🌼','❤️'];
+    for (let i = 0; i < 8; i++) {
+      const s = document.createElement('div');
+      s.className = 'sparkle';
+      s.textContent = sparks[Math.floor(Math.random()*sparks.length)];
+      s.style.left = (x + (Math.random()-.5)*220) + 'px';
+      s.style.top  = (y + (Math.random()-.5)*220) + 'px';
+      document.body.appendChild(s);
+      setTimeout(()=>s.remove(), 1900);
+    }
+    const el = document.getElementById('heartMsg');
+    el.innerHTML = `<strong style="font-size:1.3em;color:#f5c842">${msgs[mi++%msgs.length]}</strong>`;
+    setTimeout(()=>{
+      el.innerHTML = `Every single day, you give us <strong>your whole heart.</strong><br>Today we're giving it right back. 💛`;
+    }, 3000);
+  }
+</script>
+</body>
+</html>
