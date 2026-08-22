@@ -4,12 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Mother's Day, Aimee! 💛</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Quicksand', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #16082e;
     color: #ffffff;
     overflow-x: hidden;
@@ -53,7 +52,7 @@
   @keyframes sway { 0%,100%{ transform:rotate(-2deg) } 50%{ transform:rotate(2deg) } }
 
   .hero-tag {
-    font-family: 'Playfair Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-style: italic;
     color: #f5c842;
     font-size: clamp(0.9rem, 2.5vw, 1.1rem);
@@ -64,7 +63,7 @@
     animation: fadeUp .9s ease forwards .3s;
   }
   .hero-title {
-    font-family: 'Playfair Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: clamp(3.2rem, 13vw, 7.5rem);
     font-weight: 700;
     line-height: 1;
@@ -75,7 +74,8 @@
     animation: fadeUp .9s ease forwards .6s;
   }
   .hero-name {
-    font-family: 'Playfair Display', serif;
+    display: block;
+    font-family: Georgia, 'Times New Roman', serif;
     font-style: italic;
     font-size: clamp(2rem, 8vw, 5rem);
     color: #f5c842;
@@ -117,7 +117,7 @@
 
   .section-title {
     text-align: center;
-    font-family: 'Playfair Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: clamp(1.8rem, 5vw, 3rem);
     color: #f5c842;
     margin-bottom: 48px;
@@ -156,7 +156,7 @@
   .card-text { font-size:1.05rem; line-height:1.75; color:#ffffff; font-weight:500; }
   .card-sig  {
     margin-top:18px;
-    font-family:'Playfair Display',serif; font-style:italic;
+    font-family:Georgia, 'Times New Roman', serif; font-style:italic;
     color:#e8637a; font-size:1.1rem;
   }
 
@@ -200,12 +200,14 @@
     background:#1e0d3a; text-align:center;
   }
   .big-heart {
+    appearance:none; background:none; border:0; padding:0;
     font-size:clamp(8rem,22vw,14rem); line-height:1;
     cursor:pointer; display:inline-block;
     filter:drop-shadow(0 0 30px rgba(232,99,122,.6));
     animation:heartbeat 2.2s ease-in-out infinite;
     user-select:none;
   }
+  .big-heart:focus-visible { outline:4px solid #f5c842; outline-offset:10px; border-radius:50%; }
   @keyframes heartbeat {
     0%,100%{ transform:scale(1) }
     14%{ transform:scale(1.12) }
@@ -213,7 +215,7 @@
     42%{ transform:scale(1.06) }
   }
   .heart-msg {
-    font-family:'Playfair Display',serif;
+    font-family:Georgia, 'Times New Roman', serif;
     font-size:clamp(1.1rem,3.5vw,1.8rem);
     color:#ffffff; margin-top:26px; line-height:1.6;
   }
@@ -226,7 +228,7 @@
     background:radial-gradient(ellipse at 50% 100%, #3b1f7a 0%, #16082e 65%);
   }
   .closing-quote {
-    font-family:'Playfair Display',serif;
+    font-family:Georgia, 'Times New Roman', serif;
     font-size:clamp(1.4rem,4.5vw,2.6rem);
     line-height:1.55; color:#ffffff;
     max-width:680px; margin:0 auto 30px;
@@ -235,7 +237,7 @@
   .closing-note  { color:#ddd4ff; font-size:1.1rem; letter-spacing:1px; font-weight:500; }
   .closing-names {
     margin-top:14px;
-    font-family:'Playfair Display',serif; font-style:italic;
+    font-family:Georgia, 'Times New Roman', serif; font-style:italic;
     font-size:clamp(1.2rem,4vw,2rem); color:#e8637a;
   }
   .closing-flowers { margin-top:40px; font-size:2.8rem; letter-spacing:8px; }
@@ -258,6 +260,11 @@
     50% { opacity:1; transform:scale(1.6) rotate(180deg); }
     100%{ opacity:0; transform:scale(0) rotate(360deg); }
   }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation:none !important; transition:none !important; }
+    .hero-tag, .hero-title, .hero-name, .hero-sub, .hero-from { opacity:1; }
+    #heartsContainer { display:none; }
+  }
 </style>
 </head>
 <body>
@@ -268,8 +275,7 @@
 <section class="hero">
   <div class="flower-row">🌸 🌼 🌺 🌸 🌼</div>
   <div class="hero-tag">With so much love, from your family</div>
-  <div class="hero-title">Happy<br>Mother's</div>
-  <div class="hero-name">Day, Aimee! 💛</div>
+  <h1 class="hero-title">Happy<br>Mother's <span class="hero-name">Day, Aimee! 💛</span></h1>
   <div class="hero-sub">
     To the most amazing mom — the one cheering the loudest, loving the hardest, and making every ordinary moment feel extraordinary. Today is all about you.
   </div>
@@ -279,7 +285,7 @@
 
 <!-- LOVE NOTES -->
 <section class="section">
-  <div class="section-title"><span>Words</span> from the heart</div>
+  <h2 class="section-title"><span>Words</span> from the heart</h2>
   <div class="cards-grid">
 
     <div class="card">
@@ -316,7 +322,7 @@
 
 <!-- FAVORITE THINGS -->
 <section class="section section-alt">
-  <div class="section-title"><span>Our favorite</span> things about you</div>
+  <h2 class="section-title"><span>Our favorite</span> things about you</h2>
   <div class="bubbles-wrap">
     <div class="bubble">🎉 Loudest cheerer at every game</div>
     <div class="bubble">🌅 Makes ordinary days feel special</div>
@@ -337,7 +343,7 @@
 
 <!-- SPORT PRIDE -->
 <section class="section">
-  <div class="section-title"><span>Proudly</span> Mom of</div>
+  <h2 class="section-title"><span>Proudly</span> Mom of</h2>
   <div class="badges">
     <div class="badge">🥎 GRACIE · #89 · Thomas · Softball</div>
     <div class="badge">🏈 NOAH · #1 · Woodbury Football</div>
@@ -351,12 +357,13 @@
 
 <!-- INTERACTIVE HEART -->
 <section class="heart-section">
-  <div class="section-title"><span>Tap the</span> heart! 👇</div>
-  <div class="big-heart" id="bigHeart" onclick="burstHeart(event)">❤️</div>
+  <h2 class="section-title"><span>Tap the</span> heart! 👇</h2>
+  <button type="button" class="big-heart" id="bigHeart" aria-label="Show another Mother's Day message">❤️</button>
   <div class="heart-msg" id="heartMsg">
     Every single day, you give us <strong>your whole heart.</strong><br>
     Today we're giving it right back. 💛
   </div>
+  <span id="heartStatus" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"></span>
 </section>
 
 <!-- CLOSING -->
@@ -374,6 +381,7 @@
   // Floating hearts — very faint
   const hc = document.getElementById('heartsContainer');
   const emojis = ['❤️','💛','💕','🌸','💖','🌼'];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function spawnHeart() {
     const el = document.createElement('div');
     el.className = 'heart';
@@ -385,8 +393,10 @@
     hc.appendChild(el);
     setTimeout(() => el.remove(), dur * 1000 + 500);
   }
-  for (let i = 0; i < 6; i++) setTimeout(spawnHeart, i * 900);
-  setInterval(spawnHeart, 2000);
+  if (!reduceMotion) {
+    for (let i = 0; i < 6; i++) setTimeout(spawnHeart, i * 900);
+    setInterval(spawnHeart, 2000);
+  }
 
   // Heart burst
   const msgs = [
@@ -399,6 +409,10 @@
     "Strongest mom we know! 💪",
   ];
   let mi = 0;
+  const heartMsg = document.getElementById('heartMsg');
+  const heartStatus = document.getElementById('heartStatus');
+  const defaultHeartMessage = heartMsg.innerHTML;
+  let heartResetTimer;
 
   function burstHeart(e) {
     const colors = ['#f5c842','#e8637a','#7ec8a0','#a78bfa','#ffffff'];
@@ -424,12 +438,15 @@
       document.body.appendChild(s);
       setTimeout(()=>s.remove(), 1900);
     }
-    const el = document.getElementById('heartMsg');
-    el.innerHTML = `<strong style="font-size:1.3em;color:#f5c842">${msgs[mi++%msgs.length]}</strong>`;
-    setTimeout(()=>{
-      el.innerHTML = `Every single day, you give us <strong>your whole heart.</strong><br>Today we're giving it right back. 💛`;
+    const message = msgs[mi++%msgs.length];
+    heartMsg.innerHTML = `<strong style="font-size:1.3em;color:#f5c842">${message}</strong>`;
+    heartStatus.textContent = message;
+    clearTimeout(heartResetTimer);
+    heartResetTimer = setTimeout(()=>{
+      heartMsg.innerHTML = defaultHeartMessage;
     }, 3000);
   }
+  document.getElementById('bigHeart').addEventListener('click', burstHeart);
 </script>
 </body>
 </html>
