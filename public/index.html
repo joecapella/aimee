@@ -4,12 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Mother's Day, Aimee! 💛</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Quicksand', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #16082e;
     color: #ffffff;
     overflow-x: hidden;
@@ -53,7 +52,7 @@
   @keyframes sway { 0%,100%{ transform:rotate(-2deg) } 50%{ transform:rotate(2deg) } }
 
   .hero-tag {
-    font-family: 'Playfair Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-style: italic;
     color: #f5c842;
     font-size: clamp(0.9rem, 2.5vw, 1.1rem);
@@ -64,7 +63,7 @@
     animation: fadeUp .9s ease forwards .3s;
   }
   .hero-title {
-    font-family: 'Playfair Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: clamp(3.2rem, 13vw, 7.5rem);
     font-weight: 700;
     line-height: 1;
@@ -75,7 +74,7 @@
     animation: fadeUp .9s ease forwards .6s;
   }
   .hero-name {
-    font-family: 'Playfair Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-style: italic;
     font-size: clamp(2rem, 8vw, 5rem);
     color: #f5c842;
@@ -117,7 +116,7 @@
 
   .section-title {
     text-align: center;
-    font-family: 'Playfair Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: clamp(1.8rem, 5vw, 3rem);
     color: #f5c842;
     margin-bottom: 48px;
@@ -156,7 +155,7 @@
   .card-text { font-size:1.05rem; line-height:1.75; color:#ffffff; font-weight:500; }
   .card-sig  {
     margin-top:18px;
-    font-family:'Playfair Display',serif; font-style:italic;
+    font-family:Georgia, 'Times New Roman', serif; font-style:italic;
     color:#e8637a; font-size:1.1rem;
   }
 
@@ -215,7 +214,7 @@
     42%{ transform:scale(1.06) }
   }
   .heart-msg {
-    font-family:'Playfair Display',serif;
+    font-family:Georgia, 'Times New Roman', serif;
     font-size:clamp(1.1rem,3.5vw,1.8rem);
     color:#ffffff; margin-top:26px; line-height:1.6;
   }
@@ -228,7 +227,7 @@
     background:radial-gradient(ellipse at 50% 100%, #3b1f7a 0%, #16082e 65%);
   }
   .closing-quote {
-    font-family:'Playfair Display',serif;
+    font-family:Georgia, 'Times New Roman', serif;
     font-size:clamp(1.4rem,4.5vw,2.6rem);
     line-height:1.55; color:#ffffff;
     max-width:680px; margin:0 auto 30px;
@@ -237,7 +236,7 @@
   .closing-note  { color:#ddd4ff; font-size:1.1rem; letter-spacing:1px; font-weight:500; }
   .closing-names {
     margin-top:14px;
-    font-family:'Playfair Display',serif; font-style:italic;
+    font-family:Georgia, 'Times New Roman', serif; font-style:italic;
     font-size:clamp(1.2rem,4vw,2rem); color:#e8637a;
   }
   .closing-flowers { margin-top:40px; font-size:2.8rem; letter-spacing:8px; }
@@ -275,8 +274,7 @@
 <section class="hero">
   <div class="flower-row">🌸 🌼 🌺 🌸 🌼</div>
   <div class="hero-tag">With so much love, from your family</div>
-  <h1 class="hero-title">Happy<br>Mother's</h1>
-  <div class="hero-name">Day, Aimee! 💛</div>
+  <h1 class="hero-title">Happy<br>Mother's <span class="hero-name">Day, Aimee! 💛</span></h1>
   <div class="hero-sub">
     To the most amazing mom — the one cheering the loudest, loving the hardest, and making every ordinary moment feel extraordinary. Today is all about you.
   </div>
@@ -360,10 +358,11 @@
 <section class="heart-section">
   <h2 class="section-title"><span>Tap the</span> heart! 👇</h2>
   <button type="button" class="big-heart" id="bigHeart" aria-label="Show another Mother's Day message">❤️</button>
-  <div class="heart-msg" id="heartMsg" role="status" aria-live="polite">
+  <div class="heart-msg" id="heartMsg">
     Every single day, you give us <strong>your whole heart.</strong><br>
     Today we're giving it right back. 💛
   </div>
+  <span id="heartStatus" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"></span>
 </section>
 
 <!-- CLOSING -->
@@ -410,6 +409,7 @@
   ];
   let mi = 0;
   const heartMsg = document.getElementById('heartMsg');
+  const heartStatus = document.getElementById('heartStatus');
   const defaultHeartMessage = heartMsg.innerHTML;
   let heartResetTimer;
 
@@ -437,7 +437,9 @@
       document.body.appendChild(s);
       setTimeout(()=>s.remove(), 1900);
     }
-    heartMsg.innerHTML = `<strong style="font-size:1.3em;color:#f5c842">${msgs[mi++%msgs.length]}</strong>`;
+    const message = msgs[mi++%msgs.length];
+    heartMsg.innerHTML = `<strong style="font-size:1.3em;color:#f5c842">${message}</strong>`;
+    heartStatus.textContent = message;
     clearTimeout(heartResetTimer);
     heartResetTimer = setTimeout(()=>{
       heartMsg.innerHTML = defaultHeartMessage;
