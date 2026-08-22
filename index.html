@@ -200,12 +200,14 @@
     background:#1e0d3a; text-align:center;
   }
   .big-heart {
+    appearance:none; background:none; border:0; padding:0;
     font-size:clamp(8rem,22vw,14rem); line-height:1;
     cursor:pointer; display:inline-block;
     filter:drop-shadow(0 0 30px rgba(232,99,122,.6));
     animation:heartbeat 2.2s ease-in-out infinite;
     user-select:none;
   }
+  .big-heart:focus-visible { outline:4px solid #f5c842; outline-offset:10px; border-radius:50%; }
   @keyframes heartbeat {
     0%,100%{ transform:scale(1) }
     14%{ transform:scale(1.12) }
@@ -258,6 +260,11 @@
     50% { opacity:1; transform:scale(1.6) rotate(180deg); }
     100%{ opacity:0; transform:scale(0) rotate(360deg); }
   }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation:none !important; transition:none !important; }
+    .hero-tag, .hero-title, .hero-name, .hero-sub, .hero-from { opacity:1; }
+    #heartsContainer { display:none; }
+  }
 </style>
 </head>
 <body>
@@ -268,7 +275,7 @@
 <section class="hero">
   <div class="flower-row">🌸 🌼 🌺 🌸 🌼</div>
   <div class="hero-tag">With so much love, from your family</div>
-  <div class="hero-title">Happy<br>Mother's</div>
+  <h1 class="hero-title">Happy<br>Mother's</h1>
   <div class="hero-name">Day, Aimee! 💛</div>
   <div class="hero-sub">
     To the most amazing mom — the one cheering the loudest, loving the hardest, and making every ordinary moment feel extraordinary. Today is all about you.
@@ -279,7 +286,7 @@
 
 <!-- LOVE NOTES -->
 <section class="section">
-  <div class="section-title"><span>Words</span> from the heart</div>
+  <h2 class="section-title"><span>Words</span> from the heart</h2>
   <div class="cards-grid">
 
     <div class="card">
@@ -316,7 +323,7 @@
 
 <!-- FAVORITE THINGS -->
 <section class="section section-alt">
-  <div class="section-title"><span>Our favorite</span> things about you</div>
+  <h2 class="section-title"><span>Our favorite</span> things about you</h2>
   <div class="bubbles-wrap">
     <div class="bubble">🎉 Loudest cheerer at every game</div>
     <div class="bubble">🌅 Makes ordinary days feel special</div>
@@ -337,7 +344,7 @@
 
 <!-- SPORT PRIDE -->
 <section class="section">
-  <div class="section-title"><span>Proudly</span> Mom of</div>
+  <h2 class="section-title"><span>Proudly</span> Mom of</h2>
   <div class="badges">
     <div class="badge">🥎 GRACIE · #89 · Thomas · Softball</div>
     <div class="badge">🏈 NOAH · #1 · Woodbury Football</div>
@@ -351,9 +358,9 @@
 
 <!-- INTERACTIVE HEART -->
 <section class="heart-section">
-  <div class="section-title"><span>Tap the</span> heart! 👇</div>
-  <div class="big-heart" id="bigHeart" onclick="burstHeart(event)">❤️</div>
-  <div class="heart-msg" id="heartMsg">
+  <h2 class="section-title"><span>Tap the</span> heart! 👇</h2>
+  <button type="button" class="big-heart" id="bigHeart" aria-label="Show another Mother's Day message">❤️</button>
+  <div class="heart-msg" id="heartMsg" role="status" aria-live="polite">
     Every single day, you give us <strong>your whole heart.</strong><br>
     Today we're giving it right back. 💛
   </div>
@@ -374,6 +381,7 @@
   // Floating hearts — very faint
   const hc = document.getElementById('heartsContainer');
   const emojis = ['❤️','💛','💕','🌸','💖','🌼'];
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function spawnHeart() {
     const el = document.createElement('div');
     el.className = 'heart';
@@ -385,8 +393,10 @@
     hc.appendChild(el);
     setTimeout(() => el.remove(), dur * 1000 + 500);
   }
-  for (let i = 0; i < 6; i++) setTimeout(spawnHeart, i * 900);
-  setInterval(spawnHeart, 2000);
+  if (!reduceMotion) {
+    for (let i = 0; i < 6; i++) setTimeout(spawnHeart, i * 900);
+    setInterval(spawnHeart, 2000);
+  }
 
   // Heart burst
   const msgs = [
@@ -399,6 +409,9 @@
     "Strongest mom we know! 💪",
   ];
   let mi = 0;
+  const heartMsg = document.getElementById('heartMsg');
+  const defaultHeartMessage = heartMsg.innerHTML;
+  let heartResetTimer;
 
   function burstHeart(e) {
     const colors = ['#f5c842','#e8637a','#7ec8a0','#a78bfa','#ffffff'];
@@ -424,12 +437,13 @@
       document.body.appendChild(s);
       setTimeout(()=>s.remove(), 1900);
     }
-    const el = document.getElementById('heartMsg');
-    el.innerHTML = `<strong style="font-size:1.3em;color:#f5c842">${msgs[mi++%msgs.length]}</strong>`;
-    setTimeout(()=>{
-      el.innerHTML = `Every single day, you give us <strong>your whole heart.</strong><br>Today we're giving it right back. 💛`;
+    heartMsg.innerHTML = `<strong style="font-size:1.3em;color:#f5c842">${msgs[mi++%msgs.length]}</strong>`;
+    clearTimeout(heartResetTimer);
+    heartResetTimer = setTimeout(()=>{
+      heartMsg.innerHTML = defaultHeartMessage;
     }, 3000);
   }
+  document.getElementById('bigHeart').addEventListener('click', burstHeart);
 </script>
 </body>
 </html>
